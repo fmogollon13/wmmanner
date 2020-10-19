@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="manner.asmx.cs" Class="wmmanner.manner" %>

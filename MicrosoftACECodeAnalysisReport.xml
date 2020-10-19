@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Analysis>
+    <AnalysisEngineVersion>1.0.3455.36250</AnalysisEngineVersion>
+    <StartTimeStamp>jueves, 04 de octubre de 2012 11:33:23 a.m.</StartTimeStamp>
+    <StopTimeStamp>jueves, 04 de octubre de 2012 11:33:30 a.m.</StopTimeStamp>
+    <ElapsedTime>00:00:07.0774049</ElapsedTime>
+    <User>mdaza\Martin Daza</User>
+    <DataFlowSuperGraph>
+      <Nodes>16314</Nodes>
+      <Edges>21825</Edges>
+    </DataFlowSuperGraph>
+    <Targets>
+      <Target>C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\bin\wmmanner.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\Conector\EConector\bin\Debug\EConector.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\Conector\Conector\bin\Debug\Conector.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\wmmanner\Entity\bin\Debug\Entity.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\SecurityMember\bin\Debug\SecurityMember.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\DataAccessLayer\bin\Debug\DataAccessLayer.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\Logger\bin\Debug\Logger.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\Conector\DConector\bin\Debug\DConector.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\wmmanner\Data\bin\Debug\Data.dll</Target>
+      <Target>C:\Proyecto\INASSA\Progs\wmmanner\Business\bin\Debug\Business.dll</Target>
+    </Targets>
+  </Analysis>
+  <Rules>
+    <Rule>
+      <Name>Process Command Execution</Name>
+      <Identifier>ACESEC02</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>File Canonicalization</Name>
+      <Identifier>ACESEC03</Identifier>
+      <TotalResults>2</TotalResults>
+      <Results>
+        <Result>
+          <Identifier>3d13b571-78b8-4a55-bbf4-a095074df37e</Identifier>
+          <ResulstHash>AyQWP5QOXxBH/BHdt46fl0WhOmw=</ResulstHash>
+          <Color>3</Color>
+          <Vector>WebServiceMethod</Vector>
+          <EntryPoint>MethodHeader (wmmanner.manner.PonerArchivo(System.String,System.DateTime,System.Byte[])); params = [wmmanner.manner this,System.String nombre,System.DateTime fechacreado,System.Byte[] buffer]</EntryPoint>
+          <EntryVariable>buffer</EntryVariable>
+          <ConfidenceReason />
+          <ConfidenceLevel>High</ConfidenceLevel>
+          <Suppressed>false</Suppressed>
+          <SuppressionType>None</SuppressionType>
+          <Resolution>Sanitize the file path prior to passing it to file system routines.</Resolution>
+          <ProblemDescription>A file canonicalization vulnerability was found through
+		a user controlled variable that enters the application at
+		manner.asmx.cs:75 through the variable buffer which
+		eventually leads to a file canonicalization issue at
+		DArchivo.cs:40.</ProblemDescription>
+          <Transformations>
+            <Origin line="75" file="C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\manner.asmx.cs">
+              <StatementMethod>wmmanner.manner.PonerArchivo</StatementMethod>
+              <Statement>{</Statement>
+              <StatementType>Nop</StatementType>
+              <OutputVariable>nombre</OutputVariable>
+            </Origin>
+            <MethodBoundary line="77" file="C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\manner.asmx.cs">
+              <StatementMethod>wmmanner.manner.PonerArchivo</StatementMethod>
+              <Statement>return enrutar.Escribir(credencial, nombre, fechacreado, buffer);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack1</OutputVariable>
+              <InputVariable>nombre</InputVariable>
+              <ActualInputVariable>nombre</ActualInputVariable>
+              <Method>Business.Enrutador.Enrutar.Escribir</Method>
+            </MethodBoundary>
+            <MethodBoundary line="134" file="C:\Proyecto\INASSA\Progs\wmmanner\Business\Enrutador\Enrutar.cs">
+              <StatementMethod>Business.Enrutador.Enrutar.Escribir</StatementMethod>
+              <Statement>return arc.Escribir(archivo, fechacreado, trama);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack1</InputVariable>
+              <ActualInputVariable>archivo</ActualInputVariable>
+              <Method>Business.Comunicacion.Archivo.Escribir</Method>
+            </MethodBoundary>
+            <MethodBoundary line="19" file="C:\Proyecto\INASSA\Progs\wmmanner\Business\Comunicacion\Archivo.cs">
+              <StatementMethod>Business.Comunicacion.Archivo.Escribir</StatementMethod>
+              <Statement>return arc.Escribir(archivo, fechacreado, trama);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>archivo</ActualInputVariable>
+              <Method>Data.Comunicacion.DArchivo.Escribir</Method>
+            </MethodBoundary>
+            <CallResult line="25" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>sapat += ExtaerPath(archivo);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack1</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>archivo</ActualInputVariable>
+              <Method>Data.Comunicacion.DArchivo.ExtaerPath</Method>
+              <Argument>stack1</Argument>
+            </CallResult>
+            <CallResult line="25" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>sapat += ExtaerPath(archivo);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>sapat</OutputVariable>
+              <InputVariable>stack1</InputVariable>
+              <ActualInputVariable>Return from DArchivo.ExtaerPath</ActualInputVariable>
+              <Method>System.String.Concat</Method>
+              <Argument>stack1</Argument>
+            </CallResult>
+            <CallResult line="31" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>spath += sapat;</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>spath</OutputVariable>
+              <InputVariable>sapat</InputVariable>
+              <ActualInputVariable>sapat</ActualInputVariable>
+              <Method>System.String.Concat</Method>
+              <Argument>stack1</Argument>
+            </CallResult>
+            <CallResult line="40" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>spath</InputVariable>
+              <ActualInputVariable>spath</ActualInputVariable>
+              <Method>System.String.Concat</Method>
+              <Argument>stack0</Argument>
+            </CallResult>
+            <CallResult line="40" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>Return from String.Concat</ActualInputVariable>
+              <Method>System.IO.File.Open</Method>
+              <Argument>stack0</Argument>
+            </CallResult>
+          </Transformations>
+        </Result>
+        <Result>
+          <Identifier>c67d9233-0789-4de7-b875-3c85ead666cf</Identifier>
+          <ResulstHash>Q/+N1ZLoIcgZ6apa0yu2Tlu2moA=</ResulstHash>
+          <Color>3</Color>
+          <Vector>WebServiceMethod</Vector>
+          <EntryPoint>MethodHeader (wmmanner.manner.PonerArchivo(System.String,System.DateTime,System.Byte[])); params = [wmmanner.manner this,System.String nombre,System.DateTime fechacreado,System.Byte[] buffer]</EntryPoint>
+          <EntryVariable>buffer</EntryVariable>
+          <ConfidenceReason />
+          <ConfidenceLevel>High</ConfidenceLevel>
+          <Suppressed>false</Suppressed>
+          <SuppressionType>None</SuppressionType>
+          <Resolution>Sanitize the file path prior to passing it to file system routines.</Resolution>
+          <ProblemDescription>A file canonicalization vulnerability was found through
+		a user controlled variable that enters the application at
+		manner.asmx.cs:75 through the variable buffer which
+		eventually leads to a file canonicalization issue at
+		DArchivo.cs:40.</ProblemDescription>
+          <Transformations>
+            <Origin line="75" file="C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\manner.asmx.cs">
+              <StatementMethod>wmmanner.manner.PonerArchivo</StatementMethod>
+              <Statement>{</Statement>
+              <StatementType>Nop</StatementType>
+              <OutputVariable>nombre</OutputVariable>
+            </Origin>
+            <MethodBoundary line="77" file="C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\manner.asmx.cs">
+              <StatementMethod>wmmanner.manner.PonerArchivo</StatementMethod>
+              <Statement>return enrutar.Escribir(credencial, nombre, fechacreado, buffer);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack1</OutputVariable>
+              <InputVariable>nombre</InputVariable>
+              <ActualInputVariable>nombre</ActualInputVariable>
+              <Method>Business.Enrutador.Enrutar.Escribir</Method>
+            </MethodBoundary>
+            <MethodBoundary line="134" file="C:\Proyecto\INASSA\Progs\wmmanner\Business\Enrutador\Enrutar.cs">
+              <StatementMethod>Business.Enrutador.Enrutar.Escribir</StatementMethod>
+              <Statement>return arc.Escribir(archivo, fechacreado, trama);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack1</InputVariable>
+              <ActualInputVariable>archivo</ActualInputVariable>
+              <Method>Business.Comunicacion.Archivo.Escribir</Method>
+            </MethodBoundary>
+            <MethodBoundary line="19" file="C:\Proyecto\INASSA\Progs\wmmanner\Business\Comunicacion\Archivo.cs">
+              <StatementMethod>Business.Comunicacion.Archivo.Escribir</StatementMethod>
+              <Statement>return arc.Escribir(archivo, fechacreado, trama);</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>archivo</ActualInputVariable>
+              <Method>Data.Comunicacion.DArchivo.Escribir</Method>
+            </MethodBoundary>
+            <CallResult line="40" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>sarch</ActualInputVariable>
+              <Method>System.String.Concat</Method>
+              <Argument>stack1</Argument>
+            </CallResult>
+            <CallResult line="40" file="C:\Proyecto\INASSA\Progs\wmmanner\Data\Comunicacion\DArchivo.cs">
+              <StatementMethod>Data.Comunicacion.DArchivo.Escribir</StatementMethod>
+              <Statement>using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</Statement>
+              <StatementType>AssignmentStatement</StatementType>
+              <OutputVariable>stack0</OutputVariable>
+              <InputVariable>stack0</InputVariable>
+              <ActualInputVariable>Return from String.Concat</ActualInputVariable>
+              <Method>System.IO.File.Open</Method>
+              <Argument>stack0</Argument>
+            </CallResult>
+          </Transformations>
+        </Result>
+      </Results>
+    </Rule>
+    <Rule>
+      <Name>Exception Information</Name>
+      <Identifier>ACESEC04</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>LDAP Injection</Name>
+      <Identifier>ACESEC08</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>XPath Injection</Name>
+      <Identifier>ACESEC07</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>SQL Injection</Name>
+      <Identifier>ACESEC01</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>Redirection to User Controlled Site</Name>
+      <Identifier>ACESEC06</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+    <Rule>
+      <Name>Cross-Site Scripting</Name>
+      <Identifier>ACESEC05</Identifier>
+      <TotalResults>0</TotalResults>
+      <Results />
+    </Rule>
+  </Rules>
+</Report>

@@ -1,0 +1,324 @@
+﻿<HTML>
+  <TITLE>
+				Code Analysis Report
+			</TITLE>
+  <BODY>
+    <STYLE type="text/css">
+					table
+					{
+						background: #cccccc;
+						color: #444444;
+						border-spacing: 1px;
+						font: 10px 'Verdana', Arial, Helvetica, sans-serif;
+					}
+					td, th 
+					{
+						padding: 2px;
+					}
+					th
+					{
+						font-weight: bold;
+						text-align: left;
+						background: #F5F5F5;
+						color: #666666;
+						border: 1px;
+						font-size: 12px
+					}
+					tbody tr td
+					{
+						background: #c9e4e9;
+						text-align: left;
+					}
+
+					body
+					{
+						font-family: arial, helvetica, sans-serif;
+					}
+
+					.tdp
+					{
+						font-weight: bold;
+					}
+				</STYLE>
+    <table width="100%">
+      <th colspan="2" style="background: #59bba5; height: 30px">Analysis Information</th>
+      <tbody>
+        <tr>
+          <td class="tdp">
+            <nobr>Analysis Engine Version</nobr>
+          </td>
+          <td>1.0.3455.36250</td>
+        </tr>
+        <tr>
+          <td class="tdp">
+            <nobr>Created by</nobr>
+          </td>
+          <td>mdaza\Martin Daza</td>
+        </tr>
+        <tr>
+          <td class="tdp">
+            <nobr>Start time</nobr>
+          </td>
+          <td>jueves, 04 de octubre de 2012 11:33:23 a.m.</td>
+        </tr>
+        <tr>
+          <td class="tdp">
+            <nobr>Stop time</nobr>
+          </td>
+          <td>jueves, 04 de octubre de 2012 11:33:30 a.m.</td>
+        </tr>
+        <tr>
+          <td class="tdp">
+            <nobr>Elapsed time</nobr>
+          </td>
+          <td>00:00:07.0774049</td>
+        </tr>
+        <tr>
+          <td class="tdp">
+            <nobr>Data flow graph</nobr>
+          </td>
+          <td>16314 nodes, 
+						21825 edges
+					</td>
+        </tr>
+        <tr>
+          <td class="tdp">Targets</td>
+          <td width="100%">C:\Proyecto\INASSA\Progs\wmmanner\wmmanner\bin\wmmanner.dll<br />C:\Proyecto\INASSA\Progs\Conector\EConector\bin\Debug\EConector.dll<br />C:\Proyecto\INASSA\Progs\Conector\Conector\bin\Debug\Conector.dll<br />C:\Proyecto\INASSA\Progs\wmmanner\Entity\bin\Debug\Entity.dll<br />C:\Proyecto\INASSA\Progs\SecurityMember\bin\Debug\SecurityMember.dll<br />C:\Proyecto\INASSA\Progs\DataAccessLayer\bin\Debug\DataAccessLayer.dll<br />C:\Proyecto\INASSA\Progs\Logger\bin\Debug\Logger.dll<br />C:\Proyecto\INASSA\Progs\Conector\DConector\bin\Debug\DConector.dll<br />C:\Proyecto\INASSA\Progs\wmmanner\Data\bin\Debug\Data.dll<br />C:\Proyecto\INASSA\Progs\wmmanner\Business\bin\Debug\Business.dll<br /></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <table>
+      <th style="background: #59bba5; height: 30px" colspan="2">File Canonicalization (ACESEC03)</th>
+      <tr>
+        <td>
+          <b>2 results</b>
+        </td>
+      </tr>
+      <tr>
+        <td style="background: #ffffff; padding: 4px">
+          <table width="100%">
+            <tr>
+              <th colspan="4" style="background: #fcd998; height: 30px; text-align: left">
+                <nobr>Result #1</nobr>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="4">Summary</th>
+            </tr>
+            <tr>
+              <td>
+                <b>Problem</b>
+              </td>
+              <td colspan="3">A file canonicalization vulnerability was found through
+		a user controlled variable that enters the application at
+		manner.asmx.cs:75 through the variable buffer which
+		eventually leads to a file canonicalization issue at
+		DArchivo.cs:40.</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Resolution</b>
+              </td>
+              <td colspan="3">Sanitize the file path prior to passing it to file system routines.</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Entry Variable</b>
+              </td>
+              <td colspan="3">buffer</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Confidence</b>
+              </td>
+              <td colspan="3">High</td>
+            </tr>
+            <tr>
+              <th>Source Context</th>
+              <th>Line</th>
+              <th>
+                <nobr>Input Variable</nobr>
+              </th>
+              <th>Statement</th>
+            </tr>
+            <tbody>
+              <tr>
+                <td style="background: #f8e6cb">manner.asmx.cs</td>
+                <td style="background: #f8e6cb">75</td>
+                <td style="background: #f8e6cb">
+                  <nobr></nobr>
+                </td>
+                <td style="background: #f8e6cb">{</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">manner.asmx.cs</td>
+                <td style="background: #cbe6f8 ">77</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>nombre</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">return enrutar.Escribir(credencial, nombre, fechacreado, buffer);</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">Enrutar.cs</td>
+                <td style="background: #f8e6cb">134</td>
+                <td style="background: #f8e6cb">
+                  <nobr>archivo</nobr>
+                </td>
+                <td style="background: #f8e6cb">return arc.Escribir(archivo, fechacreado, trama);</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">Archivo.cs</td>
+                <td style="background: #cbe6f8 ">19</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>archivo</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">return arc.Escribir(archivo, fechacreado, trama);</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">DArchivo.cs</td>
+                <td style="background: #f8e6cb">25</td>
+                <td style="background: #f8e6cb">
+                  <nobr>archivo</nobr>
+                </td>
+                <td style="background: #f8e6cb">sapat += ExtaerPath(archivo);</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">DArchivo.cs</td>
+                <td style="background: #cbe6f8 ">25</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>Return from DArchivo.ExtaerPath</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">sapat += ExtaerPath(archivo);</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">DArchivo.cs</td>
+                <td style="background: #f8e6cb">31</td>
+                <td style="background: #f8e6cb">
+                  <nobr>sapat</nobr>
+                </td>
+                <td style="background: #f8e6cb">spath += sapat;</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">DArchivo.cs</td>
+                <td style="background: #cbe6f8 ">40</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>spath</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">DArchivo.cs</td>
+                <td style="background: #f8e6cb">40</td>
+                <td style="background: #f8e6cb">
+                  <nobr>Return from String.Concat</nobr>
+                </td>
+                <td style="background: #f8e6cb">using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</td>
+              </tr>
+            </tbody>
+            <tr>
+              <td colspan="4" style="background: #ffffff; height: 10px; border-width: 0 0 0 0" />
+            </tr>
+            <tr>
+              <th colspan="4" style="background: #fcd998; height: 30px; text-align: left">
+                <nobr>Result #2</nobr>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="4">Summary</th>
+            </tr>
+            <tr>
+              <td>
+                <b>Problem</b>
+              </td>
+              <td colspan="3">A file canonicalization vulnerability was found through
+		a user controlled variable that enters the application at
+		manner.asmx.cs:75 through the variable buffer which
+		eventually leads to a file canonicalization issue at
+		DArchivo.cs:40.</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Resolution</b>
+              </td>
+              <td colspan="3">Sanitize the file path prior to passing it to file system routines.</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Entry Variable</b>
+              </td>
+              <td colspan="3">buffer</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Confidence</b>
+              </td>
+              <td colspan="3">High</td>
+            </tr>
+            <tr>
+              <th>Source Context</th>
+              <th>Line</th>
+              <th>
+                <nobr>Input Variable</nobr>
+              </th>
+              <th>Statement</th>
+            </tr>
+            <tbody>
+              <tr>
+                <td style="background: #f8e6cb">manner.asmx.cs</td>
+                <td style="background: #f8e6cb">75</td>
+                <td style="background: #f8e6cb">
+                  <nobr></nobr>
+                </td>
+                <td style="background: #f8e6cb">{</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">manner.asmx.cs</td>
+                <td style="background: #cbe6f8 ">77</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>nombre</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">return enrutar.Escribir(credencial, nombre, fechacreado, buffer);</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">Enrutar.cs</td>
+                <td style="background: #f8e6cb">134</td>
+                <td style="background: #f8e6cb">
+                  <nobr>archivo</nobr>
+                </td>
+                <td style="background: #f8e6cb">return arc.Escribir(archivo, fechacreado, trama);</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">Archivo.cs</td>
+                <td style="background: #cbe6f8 ">19</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>archivo</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">return arc.Escribir(archivo, fechacreado, trama);</td>
+              </tr>
+              <tr>
+                <td style="background: #f8e6cb">DArchivo.cs</td>
+                <td style="background: #f8e6cb">40</td>
+                <td style="background: #f8e6cb">
+                  <nobr>sarch</nobr>
+                </td>
+                <td style="background: #f8e6cb">using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</td>
+              </tr>
+              <tr>
+                <td style="background: #cbe6f8 ">DArchivo.cs</td>
+                <td style="background: #cbe6f8 ">40</td>
+                <td style="background: #cbe6f8 ">
+                  <nobr>Return from String.Concat</nobr>
+                </td>
+                <td style="background: #cbe6f8 ">using (BinaryWriter writer = new BinaryWriter(File.Open(spath + sarch, FileMode.Append)))</td>
+              </tr>
+            </tbody>
+            <tr>
+              <td colspan="4" style="background: #ffffff; height: 10px; border-width: 0 0 0 0" />
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </BODY>
+</HTML>

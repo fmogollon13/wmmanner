@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editado con XMLSpy v2014 (x64) (http://www.altova.com) por WM (WM) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="operationType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Registrar"/>
+			<xs:enumeration value="Obtener"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="destinyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ConectorDB"/>
+			<xs:enumeration value="ConectorFS"/>
+			<xs:enumeration value="ConectorWSJSon"/>
+			<xs:enumeration value="ConectorWSObjeto"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="providerType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Ninguno"/>
+			<xs:enumeration value="Access"/>
+			<xs:enumeration value="Odbc"/>
+			<xs:enumeration value="OleDb"/>
+			<xs:enumeration value="Oracle"/>
+			<xs:enumeration value="Sql"/>
+			<xs:enumeration value="SqlCe"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="transacciones">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="proveedor" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="tipodestino" type="destinyType"/>
+							<xs:element name="TipoProveedor" type="providerType" default="Ninguno"/>
+							<xs:element name="CadenaConexion" type="xs:string"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="transaccion" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="destino" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="conexion" type="xs:string"/>
+										<xs:element name="tiempoespera" type="xs:integer"/>
+										<xs:element name="reintentos" type="xs:integer"/>
+										<xs:element name="tiemporeintento" type="xs:integer"/>
+										<xs:element name="esobjeto" type="xs:boolean"/>
+										<xs:element name="persiste" type="xs:boolean"/>
+										<xs:element name="usuario" type="xs:string" minOccurs="0"/>
+										<xs:element name="clave" type="xs:string" minOccurs="0"/>
+										<xs:element name="dominio" type="xs:string" nillable="false" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="codigo" type="xs:integer" use="required"/>
+						<xs:attribute name="operacion" type="operationType" use="required"/>
+						<xs:attribute name="Evento" type="xs:short" default="0"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

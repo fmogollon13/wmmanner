@@ -1,0 +1,72 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\Business\Business.csproj">
+			<Name>Business</Name>
+			<Project>{68C7BCF0-CB3E-43A9-88CF-0C420A8DC843}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Cifrar\Cifrar\Cifrar.csproj">
+			<Name>Cifrar</Name>
+			<Project>{A186AC54-1FA4-4AA7-82AF-82DAC598138B}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Conector\Conector\Conector.csproj">
+			<Name>Conector</Name>
+			<Project>{5D8174D4-4E59-4532-93CB-2F1F8BC3C8E0}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Conector\DConector\DConector.csproj">
+			<Name>DConector</Name>
+			<Project>{E8D6142F-E846-478E-9C11-16EE5E7C6C7E}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Conector\EConector\EConector.csproj">
+			<Name>EConector</Name>
+			<Project>{DDA2BCA0-1B53-4465-9B49-323FDC142D4B}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Entity\Entity.csproj">
+			<Name>Entity</Name>
+			<Project>{27812EB3-FFB2-4613-AFEB-8291D5FAAEB1}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Logger\Logger.csproj">
+			<Name>Logger</Name>
+			<Project>{4472D49C-CFE1-4FC4-8423-737DC582E715}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\..\DataAccessLayer\WmDataAccessLayer.csproj">
+			<Name>WmDataAccessLayer</Name>
+			<Project>{11039AC9-8C3C-4519-8602-D65853CE7446}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\wmmanner\wmmanner.csproj">
+			<Name>wmmanner</Name>
+			<Project>{86986F12-85E3-49BA-9CBA-DB374022E850}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Data\Data.csproj">
+			<Name>Data</Name>
+			<Project>{81180982-4BF7-4E05-97FE-5EC74E9FCBE6}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>
